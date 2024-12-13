@@ -1,13 +1,19 @@
 import kotlin.math.abs
 
 fun main() {
-    fun part1(input: List<String>): Int {
+    fun parseAndUnzip(
+        input: List<String>,
+    ): Pair<List<Int>, List<Int>> {
         val idsLineRegex = """(\d+) +(\d+)""".toRegex()
-        val (ids0, ids1) = input.map {
+
+        return input.map {
             val matchGroups = idsLineRegex.matchEntire(it)!!.groupValues
             matchGroups[1].toInt() to matchGroups[2].toInt()
         }.unzip()
+    }
 
+    fun part1(input: List<String>): Int {
+        val (ids0, ids1) = parseAndUnzip(input)
         val sumOfDiffs = ids0.sorted().zip(ids1.sorted()).sumOf { (id0, id1) -> abs(id0 - id1) }
         return sumOfDiffs
     }
