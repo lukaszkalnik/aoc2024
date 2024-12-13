@@ -12,7 +12,7 @@ fun main() {
 
     fun part1(input: List<String>): Int {
         val (ids0, ids1) = parseAndUnzip(input)
-        val sumOfDiffs = ids0.sorted().zip(ids1.sorted()).sumOf { (id0, id1) -> abs(id0 - id1) }
+        val sumOfDiffs = ids0.sorted().zip(ids1.sorted(), Int::minus).sumOf(::abs)
         return sumOfDiffs
     }
 
