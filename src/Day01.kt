@@ -1,9 +1,7 @@
 import kotlin.math.abs
 
 fun main() {
-    fun parseAndUnzip(
-        input: List<String>,
-    ): Pair<List<Int>, List<Int>> {
+    fun parseAndUnzip(input: List<String>): Pair<List<Int>, List<Int>> {
         val idsLineRegex = """(\d+) +(\d+)""".toRegex()
 
         return input.map {
@@ -19,7 +17,9 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        val (ids0, ids1) = parseAndUnzip(input)
+        val similarity = ids0.toSet().sumOf { id0 -> id0 * ids1.count { it == id0 } * ids0.count { it == id0 } }
+        return similarity
     }
 
     // Read the input from the `src/Day01.txt` file.
